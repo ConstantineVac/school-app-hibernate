@@ -1,8 +1,8 @@
 package gr.aueb.cf.schoolapp.dao;
 
 
-
 import gr.aueb.cf.schoolapp.dao.exceptions.TeacherDAOException;
+
 import gr.aueb.cf.schoolapp.model.Meeting;
 import gr.aueb.cf.schoolapp.model.Specialty;
 import gr.aueb.cf.schoolapp.model.Teacher;
@@ -11,7 +11,6 @@ import gr.aueb.cf.schoolapp.model.Teacher;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,20 +24,15 @@ public class TeacherDAOHibernateImpl implements ITeacherDAO {
     }
 
 
+
     @Override
     public Teacher insert(Teacher teacher) throws TeacherDAOException {
         try {
             entityManager.getTransaction().begin();
             Specialty specialty = teacher.getSpecialty();
             if (specialty != null) {
-                specialty.addTeacher(teacher);
+                specialty.addTeacher(teacher);                                                                           // Using convenience method
             }
-
-            // Your logic here to handle Meetings before inserting Teacher
-            for (Meeting meeting : teacher.getMeetings()) {
-                teacher.addMeeting(meeting);
-            }
-
             entityManager.persist(teacher);
             entityManager.getTransaction().commit();
             return teacher;
@@ -54,23 +48,11 @@ public class TeacherDAOHibernateImpl implements ITeacherDAO {
     public Teacher update(Teacher teacher) throws TeacherDAOException {
         try {
             entityManager.getTransaction().begin();
-
-            // Handle Specialty-Teacher relationship
             Specialty specialty = teacher.getSpecialty();
             if (specialty != null) {
-                specialty.addTeacher(teacher);
+                specialty.addTeacher(teacher);  // Using convenience method
             }
-
-            // Handle Meeting-Teacher relationship
-            // Assuming Teacher class has a method to get meetings
-            for (Meeting meeting : teacher.getMeetings()) {
-                // Assuming addMeeting() method exists in Teacher class
-                teacher.addMeeting(meeting);
-            }
-
-            // Merge the teacher
             Teacher updatedTeacher = entityManager.merge(teacher);
-
             entityManager.getTransaction().commit();
             return updatedTeacher;
         } catch (Exception e) {
@@ -87,19 +69,10 @@ public class TeacherDAOHibernateImpl implements ITeacherDAO {
             entityManager.getTransaction().begin();
             Teacher teacher = getById(id);
             if (teacher != null) {
-                Specialty specialty = teacher.getSpecialty();
-                if (specialty != null) {
-                    specialty.removeTeacher(teacher);
+                for(Meeting meeting : teacher.getMeetings()) {
+                    meeting.setTeacher(null);
                 }
-
-                // logic here to remove Meetings before deleting Teacher
-                for (Meeting meeting : new ArrayList<>(teacher.getMeetings())) {
-                    teacher.removeMeeting(meeting);
-                }
-
                 entityManager.remove(teacher);
-            } else {
-                throw new TeacherDAOException("Teacher with ID: " + id + " not found");
             }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -109,6 +82,7 @@ public class TeacherDAOHibernateImpl implements ITeacherDAO {
             throw new TeacherDAOException("Error deleting teacher", e);
         }
     }
+
 
     @Override
     public Optional<List<Teacher>> getByLastname(String lastname) throws TeacherDAOException {

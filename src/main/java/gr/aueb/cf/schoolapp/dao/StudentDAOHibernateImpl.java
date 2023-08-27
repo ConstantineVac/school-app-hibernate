@@ -23,26 +23,18 @@ public class StudentDAOHibernateImpl implements IStudentDAO {
     }
 
 
+
     @Override
     public Student insert(Student student) throws StudentDAOException {
         try {
             entityManager.getTransaction().begin();
-
-            // Handle City-Student relationship
             City city = student.getCity();
             if (city != null) {
-                city.addStudent(student);  // Assuming addStudent() method exists in City class
+                city.addStudent(student);  // Using convenience method
             }
-
-            // Handle Meeting-Student relationship
-            for (Meeting meeting : student.getMeetings()) {
-                student.addMeeting(meeting);  // Assuming addMeeting() method exists in Student class
-            }
-
             entityManager.persist(student);
             entityManager.getTransaction().commit();
             return student;
-
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
@@ -55,21 +47,11 @@ public class StudentDAOHibernateImpl implements IStudentDAO {
     public Student update(Student student) throws StudentDAOException {
         try {
             entityManager.getTransaction().begin();
-
-            // Handle City-Student relationship
             City city = student.getCity();
             if (city != null) {
-                city.addStudent(student);  // Assuming addStudent() method exists in City class
+                city.addStudent(student);  // Using convenience method
             }
-
-            // Handle Meeting-Student relationship
-            for (Meeting meeting : student.getMeetings()) {
-                student.addMeeting(meeting);  // Assuming addMeeting() method exists in Student class
-            }
-
-            // Merge the student
             Student updatedStudent = entityManager.merge(student);
-
             entityManager.getTransaction().commit();
             return updatedStudent;
         } catch (Exception e) {
@@ -79,28 +61,17 @@ public class StudentDAOHibernateImpl implements IStudentDAO {
             throw new StudentDAOException("Error updating student", e);
         }
     }
-
+    // In StudentDAO
     @Override
     public void delete(int id) throws StudentDAOException {
         try {
             entityManager.getTransaction().begin();
             Student student = getById(id);
             if (student != null) {
-
-                // Handle City-Student relationship
-                City city = student.getCity();
-                if (city != null) {
-                    city.removeStudent(student); // Assuming removeStudent() method exists in City class
+                for(Meeting meeting : student.getMeetings()) {
+                    meeting.setStudent(null);
                 }
-
-                // Handle Meeting-Student relationship
-                for (Meeting meeting : student.getMeetings()) {
-                    student.removeMeeting(meeting); // Assuming removeMeeting() method exists in Student class
-                }
-
                 entityManager.remove(student);
-            } else {
-                throw new StudentDAOException("Student with ID: " + id + " not found");
             }
             entityManager.getTransaction().commit();
         } catch (Exception e) {

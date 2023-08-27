@@ -120,15 +120,5 @@ public class Student {
             city.getStudents().add(this);
         }
     }
-
-    public void addMeeting(Meeting meeting) {
-        this.meetings.add(meeting);
-        meeting.setStudent(this);
-    }
-
-    public void removeMeeting(Meeting meeting) {
-        this.meetings.remove(meeting);
-        meeting.setStudent(null);
-    }
 }
 

@@ -1,45 +1,36 @@
 package gr.aueb.cf.schoolapp.dao.dbutil;
 
-import gr.aueb.cf.schoolapp.util.HibernateUtil;
-
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaDelete;
-
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class HibernateHelper {
+    private static EntityManagerFactory emf;
+    protected static ThreadLocal <EntityManager> threadLocal = new ThreadLocal<>();
 
-    private HibernateHelper() {
-    }
+    private HibernateHelper() {}
 
-    public static void eraseData() {
-        EntityManager entityManager = HibernateUtil.getEntityManager();
-        EntityTransaction transaction = entityManager.getTransaction();
-
-        try {
-            transaction.begin();
-
-            entityManager.createNativeQuery("SET foreign_key_checks = 0").executeUpdate();
-
-            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-            CriteriaDelete<Object> deleteQuery = criteriaBuilder.createCriteriaDelete(Object.class);
-            deleteQuery.from(Object.class);
-
-            Query query = entityManager.createQuery(deleteQuery);
-            query.executeUpdate();
-
-            entityManager.createNativeQuery("SET foreign_key_checks = 1").executeUpdate();
-
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            entityManager.close();
+    public static EntityManagerFactory getEntityManagerFactory() {
+        if ((emf == null) || ((emf.isOpen()))){
+            emf = Persistence.createEntityManagerFactory("myPU");
         }
+        return emf;
     }
+
+    public static EntityManager getEntityManager() {
+        EntityManager em = threadLocal.get();
+        if ((em == null) || (!em.isOpen())) {
+            em = getEntityManagerFactory().createEntityManager();
+            threadLocal.set(em);
+        }
+        return em;
+    }
+
+    // Could be used in order to make code less verbose.
+//    public static void closeEntityManager() { getEntityManager().close(); }
+//    public static void beginTransaction() { getEntityManager().getTransaction().begin(); }
+//    public static void commitTransaction() { getEntityManager().getTransaction().commit(); }
+//    public static void rollbackTransaction() { getEntityManager().getTransaction().rollback(); }
+//    public static void closeEMF() { emf.close(); }
+
 }

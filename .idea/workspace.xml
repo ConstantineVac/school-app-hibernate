@@ -10,19 +10,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab335518-caf7-4012-acf8-b8b2544e518b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/CityDAOHibernateImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/CityDAOHibernateImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/ICityDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/ICityDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/SearchTeachersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/SearchTeachersController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/MeetingDAOHibernateImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/MeetingDAOHibernateImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/SpecialtyDAOHibernateImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/SpecialtyDAOHibernateImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/StudentDAOHibernateImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/StudentDAOHibernateImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/TeacherDAOHibernateImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/TeacherDAOHibernateImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/model/City.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/model/City.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/model/Meeting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/model/Meeting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/dbutil/HibernateHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/dbutil/HibernateHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/model/Specialty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/model/Specialty.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/model/Student.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/model/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/model/Teacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/service/TeacherServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/service/TeacherServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/util/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/util/HibernateUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/school/static/templates/teachers.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/school/static/templates/teachers.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/school/static/templates/teachersmenu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/school/static/templates/teachersmenu.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +48,9 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -61,26 +65,26 @@
     <option name="showLibraryContents" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "corretto-11 (2)",
-    "last_opened_file_path": "C:/Users/wwwdr/Downloads/schoolapp4-jsp-mysql (1)",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.41609195",
-    "settings.editor.selected.configurable": "MavenSettings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-11 (2)&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/wwwdr/Downloads/schoolapp4-jsp-mysql (1)&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.41609195&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\vasilis\IdeaProjects\schoolapp-jsp-mysql-hibernate\src\main\webapp\school\static" />
@@ -226,7 +230,8 @@
       <workItem from="1692720224412" duration="4512000" />
       <workItem from="1692800588471" duration="9319000" />
       <workItem from="1693014439606" duration="21000" />
-      <workItem from="1693137212228" duration="6688000" />
+      <workItem from="1693137212228" duration="7069000" />
+      <workItem from="1693144593126" duration="4389000" />
     </task>
     <servers />
   </component>

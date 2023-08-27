@@ -60,7 +60,6 @@ import java.util.List;
         return "Specialty{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", teachers=" + teachers +
                 '}';
     }
 

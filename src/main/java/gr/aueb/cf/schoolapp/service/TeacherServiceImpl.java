@@ -24,29 +24,14 @@ public class TeacherServiceImpl implements ITeacherService {
         Teacher teacher = new Teacher();
         teacher.setFirstname(dto.getFirstname());
         teacher.setLastname(dto.getLastname());
+
         // You might need to retrieve the Specialty object associated with the teacher and set it here.
         teacher.setSpecialty(dto.getSpecialty());  // Assuming that Specialty object is part of your DTO.
 
         return teacherDAO.insert(teacher);
     }
 
-//    @Override
-//    public Teacher updateTeacher(TeacherUpdateDTO dto) throws TeacherDAOException, TeacherNotFoundException {
-//        if (dto == null) return null;
-//        Teacher teacher;
-//
-//        try {
-//            teacher = map(dto);
-//            if (teacherDAO.getById(teacher.getId()) == null) {
-//                throw new TeacherNotFoundException(teacher);
-//            }
-//
-//            return teacherDAO.update(teacher);
-//        } catch (TeacherDAOException | TeacherNotFoundException e) {
-//            e.printStackTrace();
-//            throw e;
-//        }
-//    }
+
 @Override
 public Teacher updateTeacher(TeacherUpdateDTO dto) throws TeacherDAOException, TeacherNotFoundException {
     if (dto == null) return null;

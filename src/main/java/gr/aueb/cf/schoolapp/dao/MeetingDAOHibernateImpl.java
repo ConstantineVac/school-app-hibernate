@@ -31,12 +31,24 @@ public class MeetingDAOHibernateImpl implements IMeetingDAO {
     public Meeting getById(int id) throws MeetingDAOException {
         return entityManager.find(Meeting.class, id);
     }
+// In MeetingDAO
 
     @Override
     public Meeting insert(Meeting meeting) throws MeetingDAOException {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(meeting);
+            Teacher teacher = meeting.getTeacher();
+            Student student = meeting.getStudent();
+
+            if(teacher != null) {
+                teacher.getMeetings().add(meeting);
+            }
+
+            if(student != null) {
+                student.getMeetings().add(meeting);
+            }
+
             entityManager.getTransaction().commit();
             return meeting;
         } catch (Exception e) {
@@ -68,10 +80,15 @@ public class MeetingDAOHibernateImpl implements IMeetingDAO {
             entityManager.getTransaction().begin();
             Meeting meeting = getById(id);
             if (meeting != null) {
-                // Safely disassociate the meeting from any linked student
-                Student linkedStudent = meeting.getStudent();
-                if (linkedStudent != null) {
-                    meeting.setStudent(null); // This should remove the meeting from the student's meeting list too
+                Teacher teacher = meeting.getTeacher();
+                Student student = meeting.getStudent();
+
+                if(teacher != null) {
+                    teacher.getMeetings().remove(meeting);
+                }
+
+                if(student != null) {
+                    student.getMeetings().remove(meeting);
                 }
 
                 entityManager.remove(meeting);
@@ -86,5 +103,6 @@ public class MeetingDAOHibernateImpl implements IMeetingDAO {
             throw new MeetingDAOException("Error deleting meeting", e);
         }
     }
+
 
 }

@@ -96,14 +96,4 @@ public class Teacher {
         }
 
     }
-
-    public void addMeeting(Meeting meeting) {
-        this.meetings.add(meeting);
-        meeting.setTeacher(this);
-    }
-
-    public void removeMeeting(Meeting meeting) {
-        this.meetings.remove(meeting);
-        meeting.setTeacher(null);
-    }
 }

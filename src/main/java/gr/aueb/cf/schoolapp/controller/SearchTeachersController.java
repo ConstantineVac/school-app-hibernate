@@ -22,12 +22,22 @@ import java.util.List;
 @WebServlet("/schoolapp/searchTeacher")
 public class SearchTeachersController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU");
-    private EntityManager entityManager = emf.createEntityManager();
+    private EntityManagerFactory emf;
+    private EntityManager entityManager;
 
     private TeacherDAOHibernateImpl teacherDAO = new TeacherDAOHibernateImpl(entityManager);
     private TeacherServiceImpl teacherService = new TeacherServiceImpl(teacherDAO);
+
+    @Override
+    public void init() throws ServletException {
+        emf = Persistence.createEntityManagerFactory("myPU");
+        entityManager = emf.createEntityManager();
+
+        teacherDAO = new TeacherDAOHibernateImpl(entityManager);
+        teacherService = new TeacherServiceImpl(teacherDAO);
+
+
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,9 +49,9 @@ public class SearchTeachersController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String lastname = request.getParameter("lastname").trim();
+        entityManager.clear();
 
         try {
-            entityManager.clear();
             List<Teacher> teachers = teacherService.getTeachersByLastname(lastname);
             if (teachers.isEmpty()) {
                 request.setAttribute("teachersNotFound", true);
@@ -57,4 +67,5 @@ public class SearchTeachersController extends HttpServlet {
             request.getRequestDispatcher("/school/static/templates/teachersmenu.jsp").forward(request, response);
         }
     }
+
 }
