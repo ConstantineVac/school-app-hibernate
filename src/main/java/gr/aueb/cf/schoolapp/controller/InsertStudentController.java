@@ -5,6 +5,7 @@ package gr.aueb.cf.schoolapp.controller;
 
 import gr.aueb.cf.schoolapp.dao.CityDAOHibernateImpl;
 import gr.aueb.cf.schoolapp.dao.StudentDAOHibernateImpl;
+import gr.aueb.cf.schoolapp.dao.dbutil.HibernateHelper;
 import gr.aueb.cf.schoolapp.dao.exceptions.CityDAOException;
 
 import gr.aueb.cf.schoolapp.dto.StudentInsertDTO;
@@ -167,7 +168,7 @@ private City getCityFromRequest(HttpServletRequest request) throws CityNotFoundE
 
     @Override
     public void destroy() {
-        entityManager.close();
-        emf.close();
+        HibernateHelper.closeEntityManager();
+        HibernateHelper.closeEMF();
     }
 }

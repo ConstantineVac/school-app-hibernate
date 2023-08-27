@@ -2,6 +2,7 @@ package gr.aueb.cf.schoolapp.controller;
 
 
 import gr.aueb.cf.schoolapp.dao.SpecialtyDAOHibernateImpl;
+import gr.aueb.cf.schoolapp.dao.dbutil.HibernateHelper;
 import gr.aueb.cf.schoolapp.dao.exceptions.SpecialtyDAOException;
 import gr.aueb.cf.schoolapp.dto.SpecialtyInsertDTO;
 import gr.aueb.cf.schoolapp.model.Specialty;
@@ -65,4 +66,9 @@ public class InsertSpecialtyController extends HttpServlet {
         }
     }
 
+    @Override
+    public void destroy() {
+        HibernateHelper.closeEntityManager();
+        HibernateHelper.closeEMF();
+    }
 }

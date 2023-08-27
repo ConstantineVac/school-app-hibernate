@@ -2,6 +2,7 @@ package gr.aueb.cf.schoolapp.controller;
 
 
 import gr.aueb.cf.schoolapp.dao.TeacherDAOHibernateImpl;
+import gr.aueb.cf.schoolapp.dao.dbutil.HibernateHelper;
 import gr.aueb.cf.schoolapp.dao.exceptions.TeacherDAOException;
 import gr.aueb.cf.schoolapp.model.Teacher;
 import gr.aueb.cf.schoolapp.service.TeacherServiceImpl;
@@ -49,7 +50,7 @@ public class SearchTeachersController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String lastname = request.getParameter("lastname").trim();
-        entityManager.clear();
+        HibernateHelper.clearEntityManager();
 
         try {
             List<Teacher> teachers = teacherService.getTeachersByLastname(lastname);
@@ -68,4 +69,9 @@ public class SearchTeachersController extends HttpServlet {
         }
     }
 
+    @Override
+    public void destroy() {
+        HibernateHelper.closeEntityManager();
+        HibernateHelper.closeEMF();
+    }
 }

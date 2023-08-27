@@ -4,6 +4,7 @@ package gr.aueb.cf.schoolapp.controller;
 
 
 import gr.aueb.cf.schoolapp.dao.StudentDAOHibernateImpl;
+import gr.aueb.cf.schoolapp.dao.dbutil.HibernateHelper;
 import gr.aueb.cf.schoolapp.dao.exceptions.StudentDAOException;
 import gr.aueb.cf.schoolapp.model.Student;
 import gr.aueb.cf.schoolapp.service.StudentServiceImpl;
@@ -35,10 +36,6 @@ public class SearchStudentsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-//        request.setAttribute("isError", false);
-//        request.setAttribute("error", "");
-//        request.setAttribute("studentsNotFound", false);
         request.getRequestDispatcher("/schoolapp/menu")
                 .forward(request, response);
     }
@@ -49,7 +46,7 @@ public class SearchStudentsController extends HttpServlet {
 
 
         try {
-            entityManager.clear();
+            HibernateHelper.clearEntityManager();
             List<Student> students = studentService.getStudentsByLastname(lastname);
             if (students.isEmpty()) {
                 request.setAttribute("studentsNotFound", true);
@@ -65,5 +62,11 @@ public class SearchStudentsController extends HttpServlet {
             request.setAttribute("message", message);
             request.getRequestDispatcher("/school/static/templates/studentsmenu.jsp").forward(request, response);
         }
+    }
+
+    @Override
+    public void destroy() {
+        HibernateHelper.closeEntityManager();
+        HibernateHelper.closeEMF();
     }
 }

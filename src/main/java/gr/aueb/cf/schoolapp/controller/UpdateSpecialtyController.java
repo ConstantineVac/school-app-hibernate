@@ -2,6 +2,7 @@ package gr.aueb.cf.schoolapp.controller;
 
 
 import gr.aueb.cf.schoolapp.dao.SpecialtyDAOHibernateImpl;
+import gr.aueb.cf.schoolapp.dao.dbutil.HibernateHelper;
 import gr.aueb.cf.schoolapp.dao.exceptions.SpecialtyDAOException;
 import gr.aueb.cf.schoolapp.dto.SpecialtyUpdateDTO;
 import gr.aueb.cf.schoolapp.model.Specialty;
@@ -68,5 +69,11 @@ public class UpdateSpecialtyController extends HttpServlet {
             request.getRequestDispatcher("/schoolapp/static/templates//specialtyUpdated.jsp")
                     .forward(request, response);
         }
+    }
+
+    @Override
+    public void destroy() {
+        HibernateHelper.closeEntityManager();
+        HibernateHelper.closeEMF();
     }
 }

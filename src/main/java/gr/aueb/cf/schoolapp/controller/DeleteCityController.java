@@ -2,6 +2,7 @@ package gr.aueb.cf.schoolapp.controller;
 
 
 import gr.aueb.cf.schoolapp.dao.CityDAOHibernateImpl;
+import gr.aueb.cf.schoolapp.dao.dbutil.HibernateHelper;
 import gr.aueb.cf.schoolapp.dao.exceptions.CityDAOException;
 import gr.aueb.cf.schoolapp.dto.CityDeleteDTO;
 import gr.aueb.cf.schoolapp.service.CityServiceImpl;
@@ -47,5 +48,10 @@ public class DeleteCityController extends HttpServlet {
             request.getRequestDispatcher("/school/static/templates/cities.jsp")
                     .forward(request, response);
         }
+    }
+    @Override
+    public void destroy() {
+        HibernateHelper.closeEntityManager();
+        HibernateHelper.closeEMF();
     }
 }

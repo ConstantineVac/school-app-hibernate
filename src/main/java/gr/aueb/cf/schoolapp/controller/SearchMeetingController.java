@@ -4,6 +4,7 @@ package gr.aueb.cf.schoolapp.controller;
 
 
 import gr.aueb.cf.schoolapp.dao.MeetingDAOHibernateImpl;
+import gr.aueb.cf.schoolapp.dao.dbutil.HibernateHelper;
 import gr.aueb.cf.schoolapp.dao.exceptions.MeetingDAOException;
 import gr.aueb.cf.schoolapp.model.Meeting;
 import gr.aueb.cf.schoolapp.service.MeetingServiceImpl;
@@ -45,7 +46,7 @@ public class SearchMeetingController extends HttpServlet {
 
 
         try {
-            entityManager.clear();
+            HibernateHelper.clearEntityManager();
             List<Meeting> meetings = meetingService.getMeetingByRoom(room);
             if (meetings.isEmpty()) {
                 request.setAttribute("meetingsNotFound", true);
@@ -62,5 +63,10 @@ public class SearchMeetingController extends HttpServlet {
             request.getRequestDispatcher("/school/static/templates/meetingsmenu.jsp")
                     .forward(request, response);
         }
+    }
+    @Override
+    public void destroy() {
+        HibernateHelper.closeEntityManager();
+        HibernateHelper.closeEMF();
     }
 }

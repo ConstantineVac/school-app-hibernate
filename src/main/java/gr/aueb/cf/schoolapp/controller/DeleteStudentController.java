@@ -5,6 +5,7 @@ package gr.aueb.cf.schoolapp.controller;
 
 import gr.aueb.cf.schoolapp.dao.CityDAOHibernateImpl;
 import gr.aueb.cf.schoolapp.dao.StudentDAOHibernateImpl;
+import gr.aueb.cf.schoolapp.dao.dbutil.HibernateHelper;
 import gr.aueb.cf.schoolapp.dao.exceptions.CityDAOException;
 
 import gr.aueb.cf.schoolapp.dao.exceptions.StudentDAOException;
@@ -112,6 +113,4 @@ public class DeleteStudentController extends HttpServlet {
                     .forward(request, response);
         }
     }
-
-
 }

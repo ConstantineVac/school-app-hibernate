@@ -4,6 +4,7 @@ package gr.aueb.cf.schoolapp.controller;
 
 
 import gr.aueb.cf.schoolapp.dao.CityDAOHibernateImpl;
+import gr.aueb.cf.schoolapp.dao.dbutil.HibernateHelper;
 import gr.aueb.cf.schoolapp.dao.exceptions.CityDAOException;
 import gr.aueb.cf.schoolapp.model.City;
 import gr.aueb.cf.schoolapp.service.CityServiceImpl;
@@ -33,22 +34,16 @@ public class SearchCitiesController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-//        request.setAttribute("isError", false);
-//        request.setAttribute("error", "");
-//        request.setAttribute("teachersNotFound", false);
         request.getRequestDispatcher("/schoolapp/menu")
                 .forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //response.setContentType("text/html; charset=UTF-8");
         String name = request.getParameter("name").trim();
 
-
         try {
-            entityManager.clear();
+            HibernateHelper.clearEntityManager();
             List<City> cities = cityService.getCitiesByCityName(name);
             if (cities.isEmpty()) {
                 request.setAttribute("citiesNotFound", true);
@@ -63,8 +58,11 @@ public class SearchCitiesController extends HttpServlet {
             request.setAttribute("sqlError", true);
             request.setAttribute("message", message);
             request.getRequestDispatcher("/school/static/templates/citiesmenu.jsp").forward(request, response);
-
-
         }
+    }
+    @Override
+    public void destroy() {
+        HibernateHelper.closeEntityManager();
+        HibernateHelper.closeEMF();
     }
 }

@@ -6,6 +6,7 @@ package gr.aueb.cf.schoolapp.controller;
 import gr.aueb.cf.schoolapp.dao.MeetingDAOHibernateImpl;
 import gr.aueb.cf.schoolapp.dao.StudentDAOHibernateImpl;
 import gr.aueb.cf.schoolapp.dao.TeacherDAOHibernateImpl;
+import gr.aueb.cf.schoolapp.dao.dbutil.HibernateHelper;
 import gr.aueb.cf.schoolapp.dao.exceptions.StudentDAOException;
 import gr.aueb.cf.schoolapp.dao.exceptions.TeacherDAOException;
 import gr.aueb.cf.schoolapp.dto.MeetingInsertDTO;
@@ -189,7 +190,7 @@ public class InsertMeetingController extends HttpServlet {
 
     @Override
     public void destroy() {
-        entityManager.close();
-        emf.close();
+        HibernateHelper.closeEntityManager();
+        HibernateHelper.closeEMF();
     }
 }

@@ -1,10 +1,9 @@
 package gr.aueb.cf.schoolapp.dao;
 
-
+import gr.aueb.cf.schoolapp.dao.dbutil.HibernateHelper;
 import gr.aueb.cf.schoolapp.dao.exceptions.CityDAOException;
 import gr.aueb.cf.schoolapp.model.City;
 import gr.aueb.cf.schoolapp.model.Student;
-
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -13,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class CityDAOHibernateImpl implements ICityDAO {
-
     private EntityManager entityManager;
 
     public CityDAOHibernateImpl(EntityManager entityManager) {
@@ -22,28 +20,33 @@ public class CityDAOHibernateImpl implements ICityDAO {
 
     @Override
     public Optional<List<City>> getByCityName(String name) throws CityDAOException {
+        EntityManager entityManager = HibernateHelper.getEntityManager();
+
         TypedQuery<City> query = entityManager.createQuery("FROM City c WHERE c.name LIKE :name", City.class);
         query.setParameter("name", name + "%");
+
         List<City> cities = query.getResultList();
         return cities.isEmpty() ? Optional.empty() : Optional.of(cities);
     }
 
     @Override
     public City getById(int id) throws CityDAOException {
+        EntityManager entityManager = HibernateHelper.getEntityManager();
         return entityManager.find(City.class, id);
     }
 
     @Override
     public City insert(City city) throws CityDAOException {
         try {
-            entityManager.getTransaction().begin();  // Start a transaction
+            EntityManager entityManager = HibernateHelper.getEntityManager();
+            HibernateHelper.beginTransaction();
+
             entityManager.persist(city);
-            entityManager.getTransaction().commit(); // Commit the transaction
+            HibernateHelper.commitTransaction();
+
             return city;
         } catch (Exception e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback(); // Rollback in case of an error
-            }
+            HibernateHelper.rollbackTransaction();
             throw new CityDAOException("Error inserting city", e);
         }
     }
@@ -51,44 +54,45 @@ public class CityDAOHibernateImpl implements ICityDAO {
     @Override
     public City update(City city) throws CityDAOException {
         try {
-            entityManager.getTransaction().begin();
+            EntityManager entityManager = HibernateHelper.getEntityManager();
+            HibernateHelper.beginTransaction();
+
             City updatedCity = entityManager.merge(city);
-            entityManager.getTransaction().commit();
+            HibernateHelper.commitTransaction();
+
             return updatedCity;
         } catch (Exception e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
+            HibernateHelper.rollbackTransaction();
             throw new CityDAOException("Error updating city", e);
         }
     }
 
-
     @Override
     public void delete(int id) throws CityDAOException {
         try {
-            entityManager.getTransaction().begin();
+            EntityManager entityManager = HibernateHelper.getEntityManager();
+            HibernateHelper.beginTransaction();
+
             City city = getById(id);
             if (city != null) {
-                for (Student student : new ArrayList<>(city.getStudents())) {                                            // Note: creating a new ArrayList to avoid ConcurrentModificationException
+                for (Student student : new ArrayList<>(city.getStudents())) {
                     city.removeStudent(student);
                 }
                 entityManager.remove(city);
             } else {
                 throw new CityDAOException("City with ID: " + id + " not found");
             }
-            entityManager.getTransaction().commit();
+            HibernateHelper.commitTransaction();
         } catch (Exception e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
+            HibernateHelper.rollbackTransaction();
             throw new CityDAOException("Error deleting city", e);
         }
     }
 
-
     @Override
     public List<City> getAllCities() throws CityDAOException {
+        EntityManager entityManager = HibernateHelper.getEntityManager();
+
         TypedQuery<City> query = entityManager.createQuery("FROM City", City.class);
         return query.getResultList();
     }
