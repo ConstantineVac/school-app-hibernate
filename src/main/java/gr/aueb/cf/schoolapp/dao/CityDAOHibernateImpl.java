@@ -3,10 +3,12 @@ package gr.aueb.cf.schoolapp.dao;
 
 import gr.aueb.cf.schoolapp.dao.exceptions.CityDAOException;
 import gr.aueb.cf.schoolapp.model.City;
+import gr.aueb.cf.schoolapp.model.Student;
 
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,12 +63,16 @@ public class CityDAOHibernateImpl implements ICityDAO {
         }
     }
 
+
     @Override
     public void delete(int id) throws CityDAOException {
         try {
             entityManager.getTransaction().begin();
             City city = getById(id);
             if (city != null) {
+                for (Student student : new ArrayList<>(city.getStudents())) {                                            // Note: creating a new ArrayList to avoid ConcurrentModificationException
+                    city.removeStudent(student);
+                }
                 entityManager.remove(city);
             } else {
                 throw new CityDAOException("City with ID: " + id + " not found");

@@ -2,6 +2,8 @@ package gr.aueb.cf.schoolapp.dao;
 
 import gr.aueb.cf.schoolapp.dao.exceptions.MeetingDAOException;
 import gr.aueb.cf.schoolapp.model.Meeting;
+import gr.aueb.cf.schoolapp.model.Student;
+import gr.aueb.cf.schoolapp.model.Teacher;
 
 
 import javax.persistence.EntityManager;
@@ -66,6 +68,12 @@ public class MeetingDAOHibernateImpl implements IMeetingDAO {
             entityManager.getTransaction().begin();
             Meeting meeting = getById(id);
             if (meeting != null) {
+                // Safely disassociate the meeting from any linked student
+                Student linkedStudent = meeting.getStudent();
+                if (linkedStudent != null) {
+                    meeting.setStudent(null); // This should remove the meeting from the student's meeting list too
+                }
+
                 entityManager.remove(meeting);
             } else {
                 throw new MeetingDAOException("Meeting with ID: " + id + " not found");
@@ -78,6 +86,5 @@ public class MeetingDAOHibernateImpl implements IMeetingDAO {
             throw new MeetingDAOException("Error deleting meeting", e);
         }
     }
-
 
 }

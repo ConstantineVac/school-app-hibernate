@@ -61,5 +61,18 @@ public class City {
                 ", name='" + name + '\'' +
                 '}';
     }
+
+    public void addStudent(Student student) {
+        if (students == null) {
+            students = new ArrayList<>();
+        }
+        students.add(student);
+        student.setCity(this);
+    }
+
+    public void removeStudent(Student student) {
+        students.remove(student);
+        student.setCity(null);
+    }
 }
 

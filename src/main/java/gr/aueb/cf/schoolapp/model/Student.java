@@ -91,10 +91,6 @@ public class Student {
         return city;
     }
 
-    public void setCity(City city) {
-        this.city = city;
-    }
-
     public List<Meeting> getMeetings() {
         return meetings;
     }
@@ -113,6 +109,26 @@ public class Student {
                 ", birthDate=" + birthdate +
                 ", city=" + city +
                 '}';
+    }
+
+    public void setCity(City city) {
+        if (this.city != null) {
+            this.city.getStudents().remove(this);
+        }
+        this.city = city;
+        if (city != null) {
+            city.getStudents().add(this);
+        }
+    }
+
+    public void addMeeting(Meeting meeting) {
+        this.meetings.add(meeting);
+        meeting.setStudent(this);
+    }
+
+    public void removeMeeting(Meeting meeting) {
+        this.meetings.remove(meeting);
+        meeting.setStudent(null);
     }
 }
 

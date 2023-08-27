@@ -3,7 +3,9 @@ package gr.aueb.cf.schoolapp.dao;
 
 
 import gr.aueb.cf.schoolapp.dao.exceptions.CityDAOException;
+import gr.aueb.cf.schoolapp.dao.exceptions.StudentDAOException;
 import gr.aueb.cf.schoolapp.model.City;
+import gr.aueb.cf.schoolapp.model.Student;
 
 
 import java.util.List;

@@ -1,20 +1,22 @@
 package gr.aueb.cf.schoolapp.dao;
 
-import java.util.logging.Logger;
+
 
 import gr.aueb.cf.schoolapp.dao.exceptions.TeacherDAOException;
-
+import gr.aueb.cf.schoolapp.model.Meeting;
+import gr.aueb.cf.schoolapp.model.Specialty;
 import gr.aueb.cf.schoolapp.model.Teacher;
 
 
+
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class TeacherDAOHibernateImpl implements ITeacherDAO {
-    private static final Logger LOGGER = Logger.getLogger(TeacherDAOHibernateImpl .class.getName());
+
 
     private EntityManager entityManager;
 
@@ -22,14 +24,21 @@ public class TeacherDAOHibernateImpl implements ITeacherDAO {
         this.entityManager = entityManager;
     }
 
-    public TeacherDAOHibernateImpl() {
-
-    }
 
     @Override
     public Teacher insert(Teacher teacher) throws TeacherDAOException {
         try {
             entityManager.getTransaction().begin();
+            Specialty specialty = teacher.getSpecialty();
+            if (specialty != null) {
+                specialty.addTeacher(teacher);
+            }
+
+            // Your logic here to handle Meetings before inserting Teacher
+            for (Meeting meeting : teacher.getMeetings()) {
+                teacher.addMeeting(meeting);
+            }
+
             entityManager.persist(teacher);
             entityManager.getTransaction().commit();
             return teacher;
@@ -37,78 +46,40 @@ public class TeacherDAOHibernateImpl implements ITeacherDAO {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
             }
-            throw new TeacherDAOException("Error inserting student", e);
+            throw new TeacherDAOException("Error inserting teacher", e);
         }
     }
-//    @Override
-//    public Teacher update(Teacher teacher) throws TeacherDAOException {
-//        try {
-//           entityManager.getTransaction().begin();
-//           Teacher updatedTeacher = entityManager.merge(teacher);
-//           entityManager.getTransaction().commit();
-//           return updatedTeacher;
-//        } catch (Exception e) {
-//            if (entityManager.getTransaction().isActive()) {
-//                entityManager.getTransaction().rollback();
-//            }
-//            throw new TeacherDAOException("Error updating teacher", e);
-//        }
-//    }
 
     @Override
     public Teacher update(Teacher teacher) throws TeacherDAOException {
         try {
             entityManager.getTransaction().begin();
 
-            String jpql = "UPDATE Teacher t SET t.firstname = :firstname, t.lastname = :lastname, t.specialty = :specialty WHERE t.id = :id";
-            Query query = entityManager.createQuery(jpql);
-            query.setParameter("firstname", teacher.getFirstname());
-            query.setParameter("lastname", teacher.getLastname());
-            query.setParameter("specialty", teacher.getSpecialty());
-            query.setParameter("id", teacher.getId());
-
-            int updatedCount = query.executeUpdate();
-
-            if (updatedCount == 0) {
-                throw new TeacherDAOException("No teacher was updated, possibly due to non-existent ID.");
+            // Handle Specialty-Teacher relationship
+            Specialty specialty = teacher.getSpecialty();
+            if (specialty != null) {
+                specialty.addTeacher(teacher);
             }
 
+            // Handle Meeting-Teacher relationship
+            // Assuming Teacher class has a method to get meetings
+            for (Meeting meeting : teacher.getMeetings()) {
+                // Assuming addMeeting() method exists in Teacher class
+                teacher.addMeeting(meeting);
+            }
+
+            // Merge the teacher
+            Teacher updatedTeacher = entityManager.merge(teacher);
+
             entityManager.getTransaction().commit();
-
-            // Clear the cache after committing the transaction
-            entityManager.getEntityManagerFactory().getCache().evictAll();
-
+            return updatedTeacher;
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
             }
             throw new TeacherDAOException("Error updating teacher", e);
         }
-        return teacher;
     }
-
-
-//    @Override
-//    public Teacher update(Teacher teacher) throws TeacherDAOException {
-//        try {
-//            entityManager.getTransaction().begin();
-//
-//            Teacher updatedTeacher = entityManager.merge(teacher);
-//
-//            entityManager.getTransaction().commit();
-//
-//            // Clear the cache after committing the transaction
-//            entityManager.getEntityManagerFactory().getCache().evictAll();
-//
-//            return updatedTeacher;
-//        } catch (Exception e) {
-//            if (entityManager.getTransaction().isActive()) {
-//                entityManager.getTransaction().rollback();
-//            }
-//            throw new TeacherDAOException("Error updating teacher", e);
-//        }
-//    }
-
 
     @Override
     public void delete(int id) throws TeacherDAOException {
@@ -116,16 +87,26 @@ public class TeacherDAOHibernateImpl implements ITeacherDAO {
             entityManager.getTransaction().begin();
             Teacher teacher = getById(id);
             if (teacher != null) {
+                Specialty specialty = teacher.getSpecialty();
+                if (specialty != null) {
+                    specialty.removeTeacher(teacher);
+                }
+
+                // logic here to remove Meetings before deleting Teacher
+                for (Meeting meeting : new ArrayList<>(teacher.getMeetings())) {
+                    teacher.removeMeeting(meeting);
+                }
+
                 entityManager.remove(teacher);
             } else {
-                throw new TeacherDAOException("Student with ID: " + id + " not found");
+                throw new TeacherDAOException("Teacher with ID: " + id + " not found");
             }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
             }
-            throw new TeacherDAOException("Error deleting student", e);
+            throw new TeacherDAOException("Error deleting teacher", e);
         }
     }
 

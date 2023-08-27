@@ -2,10 +2,12 @@ package gr.aueb.cf.schoolapp.dao;
 
 import gr.aueb.cf.schoolapp.dao.exceptions.SpecialtyDAOException;
 import gr.aueb.cf.schoolapp.model.Specialty;
+import gr.aueb.cf.schoolapp.model.Teacher;
 
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,6 +68,9 @@ public class SpecialtyDAOHibernateImpl implements ISpecialtyDAO {
             entityManager.getTransaction().begin();
             Specialty specialty = getById(id);
             if (specialty != null) {
+                for (Teacher teacher : new ArrayList<>(specialty.getTeachers())) { // Note: creating a new ArrayList to avoid ConcurrentModificationException
+                    specialty.removeTeacher(teacher);
+                }
                 entityManager.remove(specialty);
             } else {
                 throw new SpecialtyDAOException("Specialty with ID: " + id + " not found");
