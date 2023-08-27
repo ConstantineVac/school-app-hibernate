@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+<!--    <persistence-unit name="myPU" transaction-type="RESOURCE_LOCAL">-->
+<!--        <properties>-->
+<!--            &lt;!&ndash; Hibernate properties &ndash;&gt;-->
+<!--            &lt;!&ndash; For development, it's useful to see the generated SQL &ndash;&gt;-->
+<!--            <property name="hibernate.show_sql" value="true"/>-->
+<!--            <property name="hibernate.format_sql" value="true"/>-->
+
+
+
+<!--            &lt;!&ndash; MySQL driver and dialect. Uncomment the correct dialect based on your MySQL version &ndash;&gt;-->
+<!--            <property name="hibernate.connection.driver" value="com.mysql.cj.jdbc.Driver"/>-->
+<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>-->
+<!--&lt;!&ndash;             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>&ndash;&gt;-->
+
+<!--            &lt;!&ndash; Update the database schema on startup. For production, consider using "validate" or remove it &ndash;&gt;-->
+<!--            <property name="hibernate.hbm2ddl.auto" value="update"/>-->
+
+<!--            &lt;!&ndash; HikariCP properties &ndash;&gt;-->
+<!--            <property name="hibernate.connection.provider_class" value="com.zaxxer.hikari.hibernate.HikariConnectionProvider"/>-->
+<!--            <property name="hibernate.hikari.maximumPoolSize" value="10"/>-->
+<!--            <property name="hibernate.hikari.idleTimeout" value="30000"/>-->
+<!--            <property name="hibernate.hikari.minimumIdle" value="5"/>-->
+<!--            <property name="hibernate.hikari.connectionTimeout" value="20000"/>-->
+<!--            <property name="hibernate.hikari.dataSourceClassName" value="com.mysql.cj.jdbc.MysqlDataSource"/>-->
+
+<!--            &lt;!&ndash; Database connection details. Move these to a secure place in production &ndash;&gt;-->
+<!--            <property name="hibernate.hikari.dataSource.url" value="jdbc:mysql://localhost:3306/seminardb?serverTimezone=UTC"/>-->
+<!--            <property name="hibernate.hikari.dataSource.user" value="root"/>-->
+<!--            <property name="hibernate.hikari.dataSource.password" value="ww321278?"/>-->
+<!--        </properties>-->
+<!--    </persistence-unit>-->
+<!--</persistence>-->
+
+
+
+
+    <persistence-unit name="myPU"
+                      transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <properties>
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
+            <property name="hibernate.connection.driver" value="com.mysql.cj.jdbc.Driver" />
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/seminardb?serverTimezone=UTC" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>-->
+            <property name="hibernate.connection.username" value="root" />
+            <property name="hibernate.connection.password" value="kostas98" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+
+        </properties>
+    </persistence-unit>
+
+</persistence>
