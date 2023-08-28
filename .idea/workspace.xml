@@ -9,34 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab335518-caf7-4012-acf8-b8b2544e518b" name="Changes" comment="Made HibernateHelper Thread Safe">
+    <list default="true" id="ab335518-caf7-4012-acf8-b8b2544e518b" name="Changes" comment="Utilized HibernateHelper to Controllers">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/DeleteCityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/DeleteCityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/DeleteMeetingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/DeleteMeetingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/DeleteSpecialtyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/DeleteSpecialtyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/DeleteStudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/DeleteStudentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/DeleteTeacherController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/DeleteTeacherController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/InsertCityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/InsertCityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/InsertMeetingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/InsertMeetingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/InsertSpecialtyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/InsertSpecialtyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/InsertStudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/InsertStudentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/InsertTeacherController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/InsertTeacherController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/SearchCitiesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/SearchCitiesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/SearchMeetingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/SearchMeetingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/SearchSpecialtyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/SearchSpecialtyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/SearchStudentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/SearchStudentsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/SearchTeachersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/SearchTeachersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/UpdateCityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/UpdateCityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/UpdateMeetingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/UpdateMeetingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/UpdateSpecialtyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/UpdateSpecialtyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/UpdateStudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/UpdateStudentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/UpdateTeacherController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/controller/UpdateTeacherController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/CityDAOHibernateImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/CityDAOHibernateImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/MeetingDAOHibernateImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/MeetingDAOHibernateImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/SpecialtyDAOHibernateImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/SpecialtyDAOHibernateImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/StudentDAOHibernateImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/StudentDAOHibernateImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/TeacherDAOHibernateImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/TeacherDAOHibernateImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/dbutil/HibernateHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dao/dbutil/HibernateHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dto/TeacherDeleteDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/dto/TeacherDeleteDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/model/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/aueb/cf/schoolapp/model/Teacher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,7 +221,9 @@
       <workItem from="1692800588471" duration="9319000" />
       <workItem from="1693014439606" duration="21000" />
       <workItem from="1693137212228" duration="7069000" />
-      <workItem from="1693144593126" duration="7858000" />
+      <workItem from="1693144593126" duration="7962000" />
+      <workItem from="1693191380777" duration="76000" />
+      <workItem from="1693228751786" duration="4905000" />
     </task>
     <task id="LOCAL-00001" summary="Made HibernateHelper Thread Safe">
       <option name="closed" value="true" />
@@ -254,7 +233,15 @@
       <option name="project" value="LOCAL" />
       <updated>1693149091040</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Utilized HibernateHelper to Controllers">
+      <option name="closed" value="true" />
+      <created>1693152485873</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1693152485873</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,7 +249,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Made HibernateHelper Thread Safe" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made HibernateHelper Thread Safe" />
+    <MESSAGE value="Utilized HibernateHelper to Controllers" />
+    <option name="LAST_COMMIT_MESSAGE" value="Utilized HibernateHelper to Controllers" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

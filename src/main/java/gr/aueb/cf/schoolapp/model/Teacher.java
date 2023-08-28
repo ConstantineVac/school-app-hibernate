@@ -30,8 +30,7 @@ public class Teacher {
     private List<Meeting> meetings = new ArrayList<>();
 
 
-    public Teacher() {
-    }
+    public Teacher() {}
 
     public Teacher(Integer id, String firstname, String lastname, Specialty specialty) {
         this.id = id;

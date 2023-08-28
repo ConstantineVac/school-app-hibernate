@@ -9,6 +9,9 @@ public class TeacherDeleteDTO extends Base {
     private Specialty specialty;
     public TeacherDeleteDTO() {}
 
+    public TeacherDeleteDTO(int id, String firstname, String lastname, Specialty specialty) {
+    }
+
     public Specialty getSpecialty() {
         return specialty;
     }
